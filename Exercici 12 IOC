@@ -1,0 +1,75 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package e12_1_becerrar;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author Chris
+ */
+public class E12_1_BecerraR {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static final int MIN_CODI=0;
+    public static final int MAX_CODI=1000;
+    public static void main(String[] args) {
+        // TODO code application logic here
+        int codi=0, pers=0;
+        boolean controlError=false, correcte=true;
+        Scanner lector=new Scanner(System.in);
+        int[]array;
+        int i=0;
+        
+        System.out.println("Quantes persones vols entrar?:");
+        controlError=lector.hasNextInt();
+        if (controlError){
+            pers=lector.nextInt();
+            array=new int[pers];
+            while (i<pers){
+                System.out.println("Entra el codi de l'usuari:");
+                controlError=lector.hasNextInt();
+                if (controlError){//si va bé
+                    codi=lector.nextInt();
+                    if(codi>=MIN_CODI && codi<=MAX_CODI){
+                        correcte=true;
+                        array[i]=codi;
+                        i++;
+                    }else{
+                System.out.println("La dada introduïda està fora dels límits");
+                    }
+                }else{
+                    lector.nextLine();
+                    System.out.println("La dada introduïda està fora dels límits");
+                }
+                
+            }
+            System.out.println("Llistat de tots els codis entrats: ");
+            for (int j = 0; j < array.length;j++){
+                System.out.println(array[j]);
+            }
+            for (int k = 0; k < array.length - 1; k++) {
+                for(int j = k + 1; j < array.length; j++) {
+                    if (array[k] > array[j]) {
+                    int canvi = array[k];
+                    array[k] = array[j];
+                    array[j] = canvi;
+                    }
+                }
+            }
+            System.out.println("Llistat ordenat de tots els codis entrats:");
+            for (int j = 0; j < array.length;j++){
+                System.out.println(array[j]);
+            }
+        }else{
+            lector.nextLine();
+            System.out.println("La dada introduïda està fora dels límits");
+        }
+        
+    }
+}
