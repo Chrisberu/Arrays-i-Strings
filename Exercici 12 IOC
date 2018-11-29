@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package e12_1_becerrar;
+package exercici_12_comp;
 
 import java.util.Scanner;
 
@@ -11,65 +11,62 @@ import java.util.Scanner;
  *
  * @author Chris
  */
-public class E12_1_BecerraR {
+public class Exercici_12_comp {
 
     /**
      * @param args the command line arguments
      */
-    public static final int MIN_CODI=0;
-    public static final int MAX_CODI=1000;
+
     public static void main(String[] args) {
-        // TODO code application logic here
-        int codi=0, pers=0;
-        boolean controlError=false, correcte=true;
-        Scanner lector=new Scanner(System.in);
-        int[]array;
-        int i=0;
-        
-        System.out.println("Quantes persones vols entrar?:");
-        controlError=lector.hasNextInt();
-        if (controlError){
-            pers=lector.nextInt();
-            array=new int[pers];
-            while (i<pers){
-                System.out.println("Entra el codi de l'usuari:");
-                controlError=lector.hasNextInt();
-                if (controlError){//si va bé
-                    codi=lector.nextInt();
-                    if(codi>=MIN_CODI && codi<=MAX_CODI){
-                        correcte=true;
-                        array[i]=codi;
-                        i++;
-                    }else{
-                System.out.println("La dada introduïda està fora dels límits");
-                    }
-                }else{
-                    lector.nextLine();
-                    System.out.println("La dada introduïda està fora dels límits");
-                }
-                
+        Scanner lector = new Scanner (System.in);
+        //Variables inicials
+        String contrasenya;
+        int numPersones = 0;
+        boolean dadaCorrecte;
+        System.out.println("Quantes persones vols entrar? ");
+        //Comprobem tipus de dada
+        dadaCorrecte = lector.hasNextInt();
+        if(dadaCorrecte || numPersones > 0){
+            numPersones = lector.nextInt();
+            //Creació array
+            lector.nextLine();
+            String[] noms = new String [numPersones];
+            //Demanem valors de usuari
+            for(int i = 0; i < numPersones; i++){
+                int numUsuari = i + 1;
+                System.out.println("Entra el nom " + numUsuari);
+                noms[i] = lector.nextLine();
+                contrasenya = noms[i].replace('A','4');
+                contrasenya = contrasenya.replace('a','4');
+                contrasenya = contrasenya.replace('E','4');
+                contrasenya = contrasenya.replace('e','4');
+                contrasenya = contrasenya.replace('I','4');
+                contrasenya = contrasenya.replace('i','4');
+                contrasenya = contrasenya.replace('O','4');
+                contrasenya = contrasenya.replace('o','4');
+                contrasenya = contrasenya.replace('U','4');
+                contrasenya = contrasenya.replace('u','4');
+                System.out.println("La seva contrasenya és "+contrasenya+"\n");
             }
-            System.out.println("Llistat de tots els codis entrats: ");
-            for (int j = 0; j < array.length;j++){
-                System.out.println(array[j]);
-            }
-            for (int k = 0; k < array.length - 1; k++) {
-                for(int j = k + 1; j < array.length; j++) {
-                    if (array[k] > array[j]) {
-                    int canvi = array[k];
-                    array[k] = array[j];
-                    array[j] = canvi;
+            //Ordenar els noms.
+            for (int k = 0; k < noms.length - 1; k++) {
+                for(int j = k + 1; j < noms.length; j++) {
+                    if (noms[k].compareTo(noms[j])>0) {
+                        String canvi = noms[k];
+                        noms[k] = noms[j];
+                        noms[j] = canvi;
                     }
                 }
-            }
-            System.out.println("Llistat ordenat de tots els codis entrats:");
-            for (int j = 0; j < array.length;j++){
-                System.out.println(array[j]);
+            } 
+            //Imprimim els codis ordenats.
+            System.out.println("Llistat de noms ordenats");
+            for(int g = 0; g < noms.length;g++){
+                System.out.println(noms[g] + "");
             }
         }else{
-            lector.nextLine();
-            System.out.println("La dada introduïda està fora dels límits");
+            //No s'ha introduit un enter.
+            System.out.println("Dada incorrecte");            
         }
-        
     }
+    
 }
